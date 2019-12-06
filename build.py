@@ -5,21 +5,24 @@ from cffi import FFI
 
 #TODO: configure this better
 samver="1.9"
-htslib_dir = os.path.join('lib', 'samtools-{}'.format(samver), 'htslib-{}'.format(samver))
-brilib_dir = os.path.join('lib', 'bri', 'src')
+htslib_dir = os.path.join('src', 'samtools-{}'.format(samver), 'htslib-{}'.format(samver))
+brilib_dir = os.path.join('src', 'bri', 'src')
 
 libraries=['m', 'z', 'lzma', 'bz2', 'pthread', 'curl', 'crypto']
 library_dirs=[htslib_dir, brilib_dir]
 src_dir='src'
 
-bri_h = ['lib/bri/src/bri_index.h', 'lib/bri/src/bri_get.h']
-bri_c = ['lib/bri/src/bri_index.c', 'lib/bri/src/bri_get.c']
+bri_h = ['src/bri/src/bri_index.h', 'src/bri/src/bri_get.h']
+bri_c = ['src/bri/src/bri_index.c', 'src/bri/src/bri_get.c']
+
+headers = \
+    '#include "htslib/sam.h"\n' + \
+    '#include "htslib/kstring.h"\n' + \
+    '\n'.join('#include "{}"'.format(os.path.basename(x)) for x in bri_h)
 
 ffibuilder = FFI()
 ffibuilder.set_source("libbripy",
-    '#include "htslib/sam.h"\n' + \
-    '#include "htslib/kstring.h"\n' + \
-    '\n'.join('#include "{}"'.format(os.path.basename(x)) for x in bri_h),
+    headers,
     libraries=libraries,
     library_dirs=library_dirs,
     include_dirs=[src_dir, htslib_dir, brilib_dir],

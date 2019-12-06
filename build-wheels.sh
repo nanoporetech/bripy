@@ -11,9 +11,13 @@ shift
 echo "Changing cwd to ${workdir}"
 cd ${workdir}
 
-yum install -y zlib-devel bzip2 bzip2-devel xz-devel curl-devel openssl-devel ncurses-devel
+yum install -y zlib-devel bzip2 bzip2-devel xz-devel curl-devel openssl-devel ncurses-devel git
 rm -rf libhts.a 
-make clean libhts.a
+
+# two patches for crusty gcc
+make clean libhts.a src/bri/Makefile
+sed -i 's/qsort_r(/sort_r_simple(/' src/bri//src/bri_index.c
+sed -i '1s/^/#import "sort_r.h";/' src/bri//src/bri_index.c
 
 
 # Compile wheels
@@ -35,8 +39,8 @@ done
 for minor in $@; do
     PYBIN="/opt/python/cp3${minor}-cp3${minor}m/bin"
     "${PYBIN}/pip" install "${PACKAGE_NAME}" --no-index -f ./wheelhouse
-    "${PYBIN}/bripy" test_reads.bam
-    "${PYBIN}/bripy" get test_reads.bam MINICOL251_20170206_FNFAE02204_MN19771_sequencing_throughput_DanS_E_coli_45615_ch72_read5753_strand 
+    "${PYBIN}/bripy" index reads.bam
+    "${PYBIN}/bripy" get reads.bam MINICOL242_20170206_FNFAE01663_MN18550_sequencing_throughput_DanS_E_coli_38212_ch155_read7024_strand 
 done
 
 cd wheelhouse && ls | grep -v "${PACKAGE_NAME}.*manylinux" | xargs rm

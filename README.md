@@ -1,5 +1,5 @@
 ﻿
-![Oxford Nanopore Technologies logo](https://github.com/nanoporetech/bripy/raw/master/images/ONT_logo_590x106.png)
+![Oxford Nanopore Technologies logo](https://github.com/nanoporetech/medaka/raw/master/images/ONT_logo_590x106.png)
 
 
 Bripy
@@ -10,12 +10,24 @@ uses the [bri](https://github.com/jts/bri) library from Jared Simpson.
 
 © 2018 Oxford Nanopore Technologies Ltd.
 
-Installation and Usage
-----------------------
+Installation
+------------
 
 `bripy` can be installed using pip:
 
     pip install bripy
+
+For python3.5 and python3.6 under linux this will download precompiled
+binaries, in other environments a source distribution will be downloaded
+and compiled. Compilation from source requires the same libraries as
+[htslib](https://github.com/samtools/htslib):
+
+    'm', 'z', 'lzma', 'bz2', 'pthread', 'curl', 'crypto'
+
+since htslib is built from source as part of the process.
+
+Usage
+-----
 
 The library contains a single class interface and two example programs. To
 index a bam file for later retrieval of reads run:
