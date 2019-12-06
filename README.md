@@ -8,7 +8,7 @@ Bripy
 Bripy is a python library for extracting reads from a bam by read name. It
 uses the [bri](https://github.com/jts/bri) library from Jared Simpson.
 
-© 2018 Oxford Nanopore Technologies Ltd.
+© 2019 Oxford Nanopore Technologies Ltd.
 
 Installation
 ------------
@@ -56,9 +56,9 @@ License
 
 **Licence and Copyright**
 
-© 2018 Oxford Nanopore Technologies Ltd.
+© 2019 Oxford Nanopore Technologies Ltd.
 
-`medaka` is distributed under the terms of the Mozilla Public License 2.0.
+`bripy` is distributed under the terms of the Mozilla Public License 2.0.
 
 **Research Release**
 
