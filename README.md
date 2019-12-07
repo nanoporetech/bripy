@@ -1,5 +1,5 @@
 ﻿
-![Oxford Nanopore Technologies logo](https://github.com/nanoporetech/medaka/raw/master/images/ONT_logo_590x106.png)
+![Oxford Nanopore Technologies logo](https://github.com/nanoporetech/bripy/raw/master/images/ONT_logo_590x106.png)
 
 
 Bripy
